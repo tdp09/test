@@ -1,1 +1,1 @@
-First commit to the git repository
+First commit to the GitHub repository
