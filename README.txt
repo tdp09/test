@@ -1,7 +1,7 @@
-First commit to the GitHub repository
+﻿First commit to the GitHub repository
 
 Doncs jo he pogut fer-lo funcionar!! Sergio
 
-Uooooooooo! Anem b�!!!!! Josep 
+Uooooooooo! Anem be (excepte els accents)!!!!! Josep 
 
 és tot per 'terminal'? Noel
