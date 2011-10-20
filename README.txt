@@ -2,4 +2,6 @@ First commit to the GitHub repository
 
 Doncs jo he pogut fer-lo funcionar!! Sergio
 
-Uooooooooo! Anem bé!!!!! Josep 
+Uooooooooo! Anem bï¿½!!!!! Josep 
+
+Ã©s tot per 'terminal'? Noel
