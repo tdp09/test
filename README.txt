@@ -9,3 +9,5 @@ Uooooooooo! Anem be (excepte els accents)!!!!! Josep
 �s que no pot mostrar b� els accents?
 
 algú em llegeix??
+
+Et llegeixo!!! 
