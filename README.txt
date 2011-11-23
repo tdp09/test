@@ -8,8 +8,4 @@ Uooooooooo! Anem be (excepte els accents)!!!!! Josep
 
 �s que no pot mostrar b� els accents?
 
-<<<<<<< HEAD
-kajskldjaklsjdklajsdklasjkl
-=======
 algú em llegeix??
->>>>>>> f1fac7003675e3d4b645e56d5fdcdf93d6c0c45f
