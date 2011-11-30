@@ -1,0 +1,9 @@
+1 - Crear interficie, hereda de Remote 
+2 - Crear implementació de la interficie, hereda de UnicastRemoteObject, implementa Interficie Remota, Serializable 
+3 - Compilar projecte i generar .class (javac interficie.java objecteinterficies.java) 
+4 - rmic espaidenoms.objecteinterficie 
+5 - Arrancar rmiregistry (desde el directori on hi ha els .class, eclipse: directori bin del projecte) 
+6 - Arrancar el servidor, java Servidor.RemoteServer (Des de la mateixa ubicació on s'ha engegat el rmiregistry) 
+7 - Arrancar el client (també des de la mateixa ubicació on s'ha engegat el rmiregistry)
+
+NOTA: Atenció amb el classpath, lo ideal és setejar-lo al (*\*\bin\)
