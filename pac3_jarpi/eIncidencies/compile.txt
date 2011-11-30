@@ -1,0 +1,25 @@
+91 447 75 79
+
+info@octiluspro.com 
+
+
+JMenuItem mntmAlta
+JMenuItem mntmApunt
+JMenuItem mntmConsulta
+
+cd eIncidencies/src/Servidor 
+
+javac ApplicationMainWindow.java Area.java DBConnection.java Note.java RemoteServer.java Request.java ServerObjInterface.java ServerObjInterfaceImpl.java ShowDialogBox.java User.java 
+
+cd .. 
+java Servidor.ApplicationMainWindow 
+
+cd ../../eIncidenciesClient/src/Client
+SET CLASSPATH=%CLASSPATH%;../../../eIncidencies/src;
+
+javac AltaIncidencia.java ApplicationMainWindow.java Historic.java ResolucioIncidencia.java
+
+cd ..
+
+java Client.ApplicationMainWindow 
+
