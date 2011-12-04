@@ -1,0 +1,27 @@
+Servidor 
+------------ 
+
+La intenció d'aquest document és per aclarir com està
+estructurat el projecte. 
+
+ApplicationMainWindow.java, finestra de l'aplicació
+per registrar els subsistemes al RMI 
+
+DBConnection.java, classe que implementa metòdes 
+per llegir i escriure a la base de dades 
+
+RemoteServer.java, inicialització de tots els subsistemes
+partint de les interfícies de cadascun 
+
+ServerAulesInterface/ServerAulesInterfaceImpl, 
+interfície i implementació del subsistema aules, 
+cadascú haurà de crear el seu amb els seus metòdes 
+propis del subsistema. 
+
+ShowDialogBox, és una classe auxiliar la qual cridant-la
+ new ShowDialogBox(String missatge), mostrarà un missatge 
+ a l'usuari, aquesta classe també s'utilitza a la part 
+ del client, fora bó posar-la en un nou package i que la 
+ compartissin tant Client com Servidor 
+ 
+ 

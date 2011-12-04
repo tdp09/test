@@ -1,6 +1,5 @@
 package Client;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import Servidor.ServerObjInterface;
+import Servidor.ServerAulesInterface;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
@@ -28,8 +27,9 @@ import java.awt.CardLayout;
 public class ApplicationMainWindow implements ActionListener {
 
 	private JFrame frame;
-	private ServerObjInterface RI;
- 	private final String url = new String("rmi://localhost/eIncidencies");
+	private ServerAulesInterface objAules;
+ 	private final String Aulesurl = new String("rmi://localhost/eAules/aules");
+ 	// private final String [SUBSITEMA]url = new String("rmi://[URL CAP AL SUBSISTEMA]");
  	private boolean isConnected = false; 
  	private JMenu mnGestor = null; 
  	private JPanel currentPanel; 
@@ -94,6 +94,7 @@ public class ApplicationMainWindow implements ActionListener {
 	
 	/**
 	 * Initialize the contents of the frame.
+	 * @wbp.parser.entryPoint
 	 */
 	private void initialize() {
 		frame = new JFrame(rb.getString("frm.titol"));
@@ -110,20 +111,19 @@ public class ApplicationMainWindow implements ActionListener {
 		mntmConnectar.addActionListener(this); 
 		mnInici.add(mntmConnectar);
 		
-		mnGestor = new JMenu(this.rb.getString("menu.gestor.titol"));
+		// Per afegir un nou desplegable de menú i punts d'aquest desplegable copiar a partir d'aquí 
+		
+		// A partir d'aquí es crea un nou desplegable de menú 
+		mnGestor = new JMenu(this.rb.getString("menu.gestorAules.titol"));
 		menuBar.add(mnGestor);
 		
-		mntmAlta = new JMenuItem(this.rb.getString("menu.gestor.alta"));
+		// I aquí es crea un punt d'aquest nou desplegable 
+		mntmAlta = new JMenuItem(this.rb.getString("menu.gestorAules.cerca"));
 		mntmAlta.addActionListener(this); 
 		mnGestor.add(mntmAlta);
 		
-		mntmApunt = new JMenuItem(this.rb.getString("menu.gestor.apunt"));
-		mntmApunt.addActionListener(this);
-		mnGestor.add(mntmApunt);
+		// Tallar aquí 
 		
-		mntmConsulta = new JMenuItem(this.rb.getString("menu.gestor.historic"));
-		mntmConsulta.addActionListener(this);
-		mnGestor.add(mntmConsulta);
 		mnGestor.setEnabled(false);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 	}
@@ -131,8 +131,12 @@ public class ApplicationMainWindow implements ActionListener {
 	protected boolean ConnectToServer() {
 		boolean isConnected = false; 
 		try { 
-			this.RI = (ServerObjInterface) Naming.lookup(this.url); 
-			if (this.RI.SayHello() == 1){ 
+			// Aquesta connexió s'ha de modificar, s'hauria de crear un metòde
+			// tonto per crear una connexió amb el servidor i carregar els subsistemes 
+			// a mida que es necessitin, o bé, carregar tots els subsistemes a l'iniciar el servidor
+			// això ho hauriem de discutir en una propera reunió 
+			this.objAules = (ServerAulesInterface) Naming.lookup(this.Aulesurl); 
+			if (this.objAules.SayHello() == 1){ 
 				isConnected = true;
 			} else {
 				isConnected = false; 
@@ -157,9 +161,13 @@ public class ApplicationMainWindow implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object botoPolzat = e.getSource(); 
-		 
-		
 		if (botoPolzat == this.mntmConnectar) {
+			this.isConnected  = ConnectToServer(); 
+			if (this.isConnected)	mnGestor.setEnabled(true);  
+			this.frame.setTitle("eIncidencies Client - Connectat"); 
+		} 
+		
+/* 		if (botoPolzat == this.mntmConnectar) {
 			this.isConnected  = ConnectToServer(); 
 			if (this.isConnected)	mnGestor.setEnabled(true);  
 			this.frame.setTitle("eIncidencies Client - Connectat"); 
@@ -184,6 +192,6 @@ public class ApplicationMainWindow implements ActionListener {
 			frame.setBounds(100, 100, 450, 350);
 			frame.invalidate(); 
 			frame.validate(); 
-		}
+		} */
 	}
 }

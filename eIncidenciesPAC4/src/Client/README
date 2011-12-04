@@ -1,0 +1,12 @@
+Client
+---------- 
+
+ApplicationMainWindow.java, finestra que conté 
+tot el menú de l'aplicació (recordeu els literals que s'han 
+d'afegir al message_ca_ES.properties), i el contenidor 
+principal on s'hi carregaràn els JPanels 
+
+configuration.properties, conté la llengua i el païs que 
+s'han de carregar com a idioma 
+
+message_ca_ES.properties, conté els literals 
