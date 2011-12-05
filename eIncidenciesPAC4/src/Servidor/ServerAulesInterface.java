@@ -4,6 +4,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface ServerAulesInterface extends Remote{
-	// Metòdes comuns 
+
+	int SayHello() throws RemoteException;
+	// Metòdes del subsistema Aules 
 	
 }

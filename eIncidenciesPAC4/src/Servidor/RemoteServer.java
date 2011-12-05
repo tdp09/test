@@ -9,16 +9,15 @@ public class RemoteServer {
 	/* public static void main(String args[]) throws IOException{
 		new RemoteServer(); 
 	}*/ 
-	ServerObjInterface ri = null; 
+	ServerAulesInterface objAules = null; // Creació variable de classe, aules
 	private boolean initialized = false; 
 	
 	public RemoteServer() {
 		try{
-			/* // System.out.println("Server: Registrant objecte");
-			this.ri = new Servidor.ServerObjInterfaceImpl(); 
-			Naming.rebind("//localhost/eIncidencies", ri); 
-			// System.out.println("Servidor iniciat.");
-			this.initialized = true; */ 
+			System.out.println("Server: Registrant objecte");
+			this.objAules = new Servidor.ServerAulesInterfaceImpl(); // Registrar la implementació d'aules 
+			Naming.rebind("//localhost/eAules/aules", objAules); // Assignar URL Aules 
+			this.initialized = true;  
 			// Inicialitzar per a cada subsistema  la seva própia URL 
 			
 		} catch (RemoteException e) {
@@ -39,7 +38,7 @@ public class RemoteServer {
 	
 	public void stopRemoteServer() {
 		this.initialized = false; 
-		this.ri = null; 
+		this.objAules = null; 
 		System.exit(0); 
 	}
 }
