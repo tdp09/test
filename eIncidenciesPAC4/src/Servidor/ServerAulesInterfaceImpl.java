@@ -3,6 +3,7 @@ import java.sql.ResultSet;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -282,15 +283,20 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 	@Override
 	public boolean cancelBooking(int bookingId, String user) throws RemoteException {
 		// Update and calcFee for a space and user
+		boolean result = false; 
 		Booking b = this.getBookingById(bookingId); 
 		double fee = this.calcFee(b);  
-		 Payment p = this.getPaymentByBookingId(bookingId); 
-		 p.setTotalPrice(fee); 
-		 this.updatePaymentPrice(p); 
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd"); 
-		 String sql ="UPDATE booking SET cancel_time=" + Calendar.g AND cancel_user="; 
-		
-		return false;
+		Payment p = this.getPaymentByBookingId(bookingId); 
+		p.setTotalPrice(fee); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		// Aqui es podria utilitzar una transacció, però ja que només s'han d'actualitzar 2 taules diferents és pot deixar així 
+		String sql ="UPDATE booking SET cancel_time=" + sdf.format(new Date().getTime()) + " AND cancel_user=" + user; 
+		int success = this.objConnection.executeInsert(sql);
+		if (success == 1) {
+			result = true;
+			this.updatePaymentPrice(p); 
+		}
+		return result;
 	}
 
 	@Override
