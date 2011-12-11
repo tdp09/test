@@ -18,6 +18,7 @@ public class RemoteServer {
 			this.objAules = new Servidor.ServerAulesInterfaceImpl(); // Registrar la implementació d'aules 
 			Naming.rebind("//localhost/eAules/aules", objAules); // Assignar URL Aules 
 			this.initialized = true;  
+			this.objAules.SayHello(); 
 			// Inicialitzar per a cada subsistema  la seva própia URL 
 			
 		} catch (RemoteException e) {

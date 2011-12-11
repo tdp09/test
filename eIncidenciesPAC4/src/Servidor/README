@@ -24,4 +24,7 @@ ShowDialogBox, és una classe auxiliar la qual cridant-la
  del client, fora bó posar-la en un nou package i que la 
  compartissin tant Client com Servidor 
  
+ Reserves per revisar = P = Pendents
+ Reserves confirmades per un tŽcnic = C = Confirmada 
+ 
  

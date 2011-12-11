@@ -50,8 +50,6 @@ public class DBConnection {
 		this.urlConnection = properties.getProperty("url");
 		this.username = properties.getProperty("username"); 
 		this.password = properties.getProperty("password"); 
-		
-		
 	}
 
 	public Connection getConnection() {
@@ -89,7 +87,6 @@ public class DBConnection {
 		try {
 			select = this.con.createStatement();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("SQL exception fired!"); 
 			e.printStackTrace();
 		} catch (Exception e){
