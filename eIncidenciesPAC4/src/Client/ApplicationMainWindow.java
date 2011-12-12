@@ -135,6 +135,7 @@ public class ApplicationMainWindow implements ActionListener {
 			// tonto per crear una connexió amb el servidor i carregar els subsistemes 
 			// a mida que es necessitin, o bé, carregar tots els subsistemes a l'iniciar el servidor
 			// això ho hauriem de discutir en una propera reunió 
+			// Update 12-12-11, crec que fora bo, carregar tots els objectes al registrar el servidor i accedir-hi per variables locals 
 			this.objAules = (ServerAulesInterface) Naming.lookup(this.Aulesurl); 
 			if (this.objAules.SayHello() == 1){ 
 				isConnected = true;

@@ -25,6 +25,8 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 		objConnection = new DBConnection(); 
 	}
 
+	// Start code for aules subsystem
+	
 	@Override
 	public int SayHello() throws RemoteException { // Metòde per testejar si hi ha connexió desde el client cap al servidor 
 		String sql = "SELECT * FROM SPACES";
@@ -68,7 +70,8 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 				Date creationTime = rs.getDate("creation_time"); 
 				Date cancelTime = rs.getDate("cancel_time"); 
 				String cancelUser = rs.getString("cancel_user");
-				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser); 
+				String cancelReason = rs.getString("cancel_reason"); 
+				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser,cancelReason); 
 				arr.add(b); 
 			}
 			rs.close(); 
@@ -100,7 +103,8 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 				Date creationTime = rs.getDate("creation_time"); 
 				Date cancelTime = rs.getDate("cancel_time"); 
 				String cancelUser = rs.getString("cancel_user");
-				b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser); 
+				String cancelReason = rs.getString("cancel_reason"); 
+				b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser,cancelReason); 
 			}
 			rs.close(); 
 		} catch (SQLException e) {
@@ -131,7 +135,8 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 				Date creationTime = rs.getDate("creation_time"); 
 				Date cancelTime = rs.getDate("cancel_time"); 
 				String cancelUser = rs.getString("cancel_user");
-				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser); 
+				String cancelReason = rs.getString("cancel_reason"); 
+				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser,cancelReason); 
 				arr.add(b); 
 			}
 			rs.close(); 
@@ -163,7 +168,8 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 				Date creationTime = rs.getDate("creation_time"); 
 				Date cancelTime = rs.getDate("cancel_time"); 
 				String cancelUser = rs.getString("cancel_user");
-				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser); 
+				String cancelReason = rs.getString("cancelReason"); 
+				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser,cancelReason); 
 				arr.add(b); 
 			}
 			rs.close(); 
@@ -195,7 +201,8 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 				Date creationTime = rs.getDate("creation_time"); 
 				Date cancelTime = rs.getDate("cancel_time"); 
 				String cancelUser = rs.getString("cancel_user");
-				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser); 
+				String cancelReason = rs.getString("cancel_reason"); 
+				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser,cancelReason); 
 				arr.add(b); 
 			}
 			rs.close(); 
@@ -227,7 +234,8 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 				Date creationTime = rs.getDate("creation_time"); 
 				Date cancelTime = rs.getDate("cancel_time"); 
 				String cancelUser = rs.getString("cancel_user");
-				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser); 
+				String cancelReason = rs.getString("cancel_reason"); 
+				Booking b = new Booking(bookingId,userId,spaceId,startTime,endTime,pax,status,creationTime,cancelTime,cancelUser,cancelReason); 
 				arr.add(b); 
 			}
 			rs.close(); 
@@ -281,20 +289,23 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 
 
 	@Override
-	public boolean cancelBooking(int bookingId, String user) throws RemoteException {
+	public boolean cancelBooking(int bookingId, String user,String cancelReason) throws RemoteException {
 		// Update and calcFee for a space and user
 		boolean result = false; 
 		Booking b = this.getBookingById(bookingId); 
-		double fee = this.calcFee(b);  
-		Payment p = this.getPaymentByBookingId(bookingId); 
-		p.setTotalPrice(fee); 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		// Aqui es podria utilitzar una transacci—, per˜ ja que nomŽs s'han d'actualitzar 2 taules diferents Žs pot deixar aix’ 
 		String sql ="UPDATE booking SET cancel_time=" + sdf.format(new Date().getTime()) + " AND cancel_user=" + user; 
 		int success = this.objConnection.executeInsert(sql);
 		if (success == 1) {
 			result = true;
-			this.updatePaymentPrice(p); 
+			// Fix THAT!!! 
+			if (!user.equals("tecnic")) {
+				double fee = this.calcFee(b);  
+				Payment p = this.getPaymentByBookingId(bookingId); 
+				p.setTotalPrice(fee);
+				this.updatePaymentPrice(p);
+			} 
 		}
 		return result;
 	}
@@ -359,5 +370,7 @@ public class ServerAulesInterfaceImpl extends UnicastRemoteObject implements Ser
 		if (success == 1) result = true; 
 		return result; 
 	}
+	
+	// End code for aules subsystem 
 
 }

@@ -13,8 +13,10 @@ public class Booking {
 	private Date creationTime; 
 	private Date cancelTime; 
 	private String cancelUser; 
+	private String cancelReason; 
 	
-	public Booking(int bookingId, String userId, int spaceId, Date startTime, Date endTime, int pax, String status, Date creationTime, Date cancelTime, String cancelUser) {
+	
+	public Booking(int bookingId, String userId, int spaceId, Date startTime, Date endTime, int pax, String status, Date creationTime, Date cancelTime, String cancelUser, String cancelReason) {
 		this.bookingId = bookingId; 
 		this.userId = userId; 
 		this.spaceId = spaceId; 
@@ -25,6 +27,7 @@ public class Booking {
 		this.creationTime = creationTime; 
 		this.cancelTime = cancelTime; 
 		this.cancelUser  = cancelUser; 
+		this.cancelReason = cancelReason; 
 	}
 	
 	/* public Booking(int bookingId, String userId, int spaceId, Date startTime, Date endTime, int pax, String status, Date creationTime) {

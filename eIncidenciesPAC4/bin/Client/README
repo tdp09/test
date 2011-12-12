@@ -10,3 +10,8 @@ configuration.properties, conté la llengua i el païs que
 s'han de carregar com a idioma 
 
 message_ca_ES.properties, conté els literals 
+
+Metodes que necessito d'altres subsistemes
+--------------------------------------- 
+getAllUsers() --- ArrayList<User> 
+getAllSpaces() --- ArrayList<Space> 

@@ -18,6 +18,6 @@ public interface ServerAulesInterface extends Remote{
 	ArrayList<Booking> getConfirmedBooking() throws RemoteException;  
 	boolean testSpaceToBooking(Booking request) throws RemoteException; 
 	boolean confirmBooking(Booking request) throws RemoteException,BookingExceptionStatusNotPending;  // Do a protected method to save Protected objBooking.save()
-	boolean cancelBooking(int bookingId, String user) throws RemoteException;  
+	boolean cancelBooking(int bookingId, String user,String cancelReason) throws RemoteException;  
 	double calcFee(Booking request) throws RemoteException; 
 }
